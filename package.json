@@ -1,0 +1,21 @@
+{
+  "name": "tsproject24jul",
+  "version": "1.0.0",
+  "description": "project24Jul",
+  "license": "ISC",
+  "author": "SwapSuy",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js test"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.1.0",
+    "@playwright/test": "^1.54.1",
+    "cucumber-html-reporter": "^7.2.0",
+    "dotenv": "^17.2.0",
+    "playwright": "^1.54.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

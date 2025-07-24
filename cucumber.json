@@ -1,0 +1,15 @@
+{
+  "default": {
+    "formatOptions": {
+      "snippetInterface": "async-await"
+    },
+    "paths": ["MainTest/tests/features/*.feature"],
+    "require": [
+      "MainTest/support/hooks.ts",
+      "MainTest/support/world.ts",
+      "MainTest/tests/steps/*.ts"
+    ],
+    "requireModule": ["ts-node/register"],
+    "dryRun": false
+  }
+}
