@@ -26,11 +26,16 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: 🚀 Run tests (Cucumber + Playwright)
-        run: npx cucumber-js --require-module ts-node/register --require MainTest/tests/steps/**/*.ts --require MainTest/support/**/*.ts --publish-quiet
+        run: |
+          npx cucumber-js \
+            --require-module ts-node/register \
+            --require MainTest/tests/steps/**/*.ts \
+            --require MainTest/support/**/*.ts \
+            --publish-quiet
 
       - name: 📤 Upload HTML Report (optional)
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4   # ✅ Updated to v4 (fixes the deprecation error)
         with:
           name: test-report
-          path: MainTest/reports/html-report/ # adjust based on your setup
+          path: MainTest/reports/html-report/  # 🛠️ Change this path if needed
