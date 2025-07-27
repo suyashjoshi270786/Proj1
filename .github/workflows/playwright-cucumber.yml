@@ -1,0 +1,36 @@
+name: Playwright + Cucumber Tests
+
+on:
+  push:
+    branches: [ main, feature/* ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: ⬇️ Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: 🚀 Run tests (Cucumber + Playwright)
+        run: npx cucumber-js --require-module ts-node/register --require MainTest/tests/steps/**/*.ts --require MainTest/support/**/*.ts --publish-quiet
+
+      - name: 📤 Upload HTML Report (optional)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: MainTest/reports/html-report/ # adjust based on your setup
