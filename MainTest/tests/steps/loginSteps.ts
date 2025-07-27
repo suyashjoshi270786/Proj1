@@ -18,7 +18,7 @@ When(
 );
 
 Then(
-  "user should be redirected to the dashboard",
+  "user should be redirecte to the dashboard",
   async function (this: CustomWorld) {
     const lognPage = new LoginPage(this.page);
     const expectedUrl = "https://www.saucedemo.com/inventory.html";

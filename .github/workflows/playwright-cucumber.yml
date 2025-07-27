@@ -30,8 +30,7 @@ jobs:
           npx cucumber-js \
             --require-module ts-node/register \
             --require MainTest/tests/steps/**/*.ts \
-            --require MainTest/support/**/*.ts \
-            --publish-quiet
+            --require MainTest/support/**/*.ts
 
       - name: 📤 Upload HTML Report (optional)
         if: always()
