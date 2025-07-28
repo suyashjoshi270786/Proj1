@@ -7,14 +7,18 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test"
+    "test": "cucumber-js test",
+    "report": "npx cucumber-js MainTest/tests/features/*.feature --require-module ts-node/register --require MainTest/**/*.ts --format json:reports/cucumber-report.json && ts-node generate-report.ts"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^12.1.0",
     "@playwright/test": "^1.54.1",
+    "allure-commandline": "^2.34.1",
+    "allure-playwright": "^3.3.2",
     "cucumber-html-reporter": "^7.2.0",
     "dotenv": "^17.2.0",
     "playwright": "^1.54.1",
+    "playwright-qase-reporter": "^2.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
