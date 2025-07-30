@@ -6,7 +6,7 @@ setDefaultTimeout(60 * 1000);
 Before(async function (this: CustomWorld) {
   console.log("✅ Before hook running...");
   //this.browser = await chromium.launch();
-  this.browser = await chromium.launch({ headless: true, slowMo: 100 });
+  this.browser = await chromium.launch({ headless: false, slowMo: 100 });
   const context = await this.browser.newContext();
   this.page = await context.newPage();
   console.log("✅ Page created?", !!this.page); // should print true
