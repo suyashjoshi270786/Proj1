@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "*" ]
   schedule:
-    - cron: '09 15 * * *'  # ⏰ Runs daily at 9:00 AM IST (3:30 AM UTC)
+    - cron: '36 15 * * *'  # ⏰ Runs daily at 9:00 AM IST (3:30 AM UTC)
   workflow_dispatch:      # 🚀 Optional: allows manual triggering via UI
 
 jobs:
