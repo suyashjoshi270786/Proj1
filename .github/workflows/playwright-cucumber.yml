@@ -5,6 +5,9 @@ on:
     branches: [ main, feature/* ]
   pull_request:
     branches: [ "*" ]
+  schedule:
+    - cron: '09 15 * * *'  # ⏰ Runs daily at 9:00 AM IST (3:30 AM UTC)
+  workflow_dispatch:      # 🚀 Optional: allows manual triggering via UI
 
 jobs:
   test:
@@ -17,7 +20,7 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20   # ✅ Cucumber v9+ requires Node 20 or above
+          node-version: 20
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -34,7 +37,7 @@ jobs:
 
       - name: 📤 Upload HTML Report (optional)
         if: always()
-        uses: actions/upload-artifact@v4   # ✅ Use v4 (v3 is deprecated)
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
-          path: MainTest/reports/html-report/  # 📂 Adjust if your report path is different
+          path: MainTest/reports/html-report/
