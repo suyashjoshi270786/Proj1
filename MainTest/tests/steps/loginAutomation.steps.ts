@@ -26,3 +26,21 @@ When("user clicks on the login button", async function () {
 Then("user should see the logged in home page", async function () {
   console.log("Verifying the logged in home page");
 });
+
+Then("user logs out and is redirected to the login page", async function () {
+  const loginPage = new LoginAutomationPage(this.page);
+  await loginPage.logout();
+});
+
+When("user enters invalid credentials from test", async function () {
+  const loginPage = new LoginAutomationPage(this.page);
+  const rawData = fs.readFileSync(
+    "MainTest/test-data/invalidCredentials.json",
+    "utf-8"
+  );
+  const credentials = JSON.parse(rawData);
+  await loginPage.enterInvalidCredentials(
+    credentials.email,
+    credentials.password
+  );
+});

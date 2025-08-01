@@ -1,6 +1,7 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { NewUserSignUpPage } from "../pages/newUserSignUp.page";
+import * as fs from "fs";
 
 Given("I am on the Signup Login page", async function () {
   const newUserSignUpPage = new NewUserSignUpPage(this.page);
@@ -56,19 +57,35 @@ Then("I click on Continue button", async function () {
   await newUserSignUpPage.continueButton.click();
 });
 
+Given("user is on home page", async function () {
+  const newUserSignUpPage = new NewUserSignUpPage(this.page);
+  await newUserSignUpPage.navigateToSignupPage();
+  expect(await newUserSignUpPage.page.title()).toContain("Automation Exercise");
+});
 
+Then("user validates all anchor link text in header", async function () {
+  const newUserSignUpPage = new NewUserSignUpPage(this.page);
+  await newUserSignUpPage.anchorLinkTextValidation();
+});
 
-         Given('user is on home page', async function () {
-            const newUserSignUpPage = new NewUserSignUpPage(this.page);
-            await newUserSignUpPage.navigateToSignupPage();
-            expect(await newUserSignUpPage.page.title()).toContain("Automation Exercise");
+When(
+  "I enter email address as an existing email from the test data",
+  async function () {
+    const newUserSignUpPage = new NewUserSignUpPage(this.page);
+    const rawData = fs.readFileSync(
+      "MainTest/test-data/userCredentials.json",
+      "utf-8"
+    );
+    const credentials = JSON.parse(rawData);
+    await newUserSignUpPage.enterExistingEmail(credentials.email);
+    console.log("Entered existing email:", credentials.email);
+  }
+);
 
-         });
-
-
-
-         Then('user validates all anchor link text in header', async function () {
-            const newUserSignUpPage = new NewUserSignUpPage(this.page);
-           await newUserSignUpPage.anchorLinkTextValidation();
-        
-         });
+Then(
+  "I should see an error message indicating that the email already exists",
+  async function () {
+    const newUserSignUpPage = new NewUserSignUpPage(this.page);
+    await newUserSignUpPage.getSignUpErrorMessage();
+  }
+);
