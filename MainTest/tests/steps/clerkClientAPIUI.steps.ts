@@ -16,10 +16,16 @@ When("user checks the GET client endpoint", async function () {
   //this.response = response; // ✅ Store in World
 });
 
-Then("the UI title should be {string}", async function (string) {
-  const heading = await this.page.locator("h1").first();
-  const title = await heading.textContent();
-  expect(heading).toHaveText(title);
+// Then("the UI title should be {string}", async function (string) {
+//   const heading = await this.page.locator("h1").first();
+//   const title = await heading.textContent();
+//   expect(heading).toHaveText(title);
+// });
+
+Then("the UI title should be {string}", async function (expectedTitle: string) {
+  const heading = this.page.locator("h1").first();
+  await heading.waitFor({ timeout: 10000 }); // ⏳ Wait up to 10s for the <h1> to appear
+  await expect(heading).toHaveText(expectedTitle, { timeout: 10000 }); // ✅ Match against the passed string
 });
 
 Then("the response status should be 200", async function () {
