@@ -26,6 +26,7 @@ export class NewUserSignUpPage {
   createAccountButton: Locator;
   accountInformationMessage: Locator;
   continueButton: Locator;
+  signupErrorMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -54,6 +55,7 @@ export class NewUserSignUpPage {
       "h2[data-qa='account-created'] b"
     );
     this.continueButton = this.page.locator("a[data-qa='continue-button']");
+    this.signupErrorMessage = this.page.locator("form[action='/signup'] p");
   }
 
   async navigateToSignupPage() {
@@ -157,5 +159,17 @@ export class NewUserSignUpPage {
     }
 
     console.log("all anchor link text are validated successfully");
+  }
+
+  async enterExistingEmail(email: string) {
+    await this.nameInput.fill("John Doe");
+    await this.emailInput.fill(email);
+  }
+
+  async getSignUpErrorMessage() {
+    await this.signupErrorMessage.waitFor({ state: "visible" });
+    const errorText = await this.signupErrorMessage.textContent();
+    expect(errorText).toContain("Email Address already exist!");
+    console.log("Sign-up error message displayed as expected:", errorText);
   }
 }
