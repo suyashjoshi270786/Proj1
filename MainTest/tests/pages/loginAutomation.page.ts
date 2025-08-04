@@ -43,7 +43,6 @@ export class LoginAutomationPage {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.loginButton.click();
-
     const errorText = await this.loginErrorText.innerText();
     console.log("Error text:", errorText);
     expect(errorText).toContain("Your email or password is incorrect!");
