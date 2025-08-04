@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js test",
-    "report": "npx cucumber-js MainTest/tests/features/*.feature --require-module ts-node/register --require MainTest/**/*.ts --format json:reports/cucumber-report.json && ts-node generate-report.ts"
+    "report": "npx cucumber-js MainTest/tests/features/*.feature --require-module ts-node/register --require MainTest/**/*.ts --format json:reports/cucumber-report.json && ts-node generate-report.ts",
+    "lint:fix": "eslint ./ --ext .js,.ts,.tsx --fix"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^12.1.0",
