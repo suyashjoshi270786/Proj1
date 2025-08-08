@@ -10,6 +10,8 @@ Before(async function (this: CustomWorld) {
   const context = await this.browser.newContext();
   this.page = await context.newPage();
   console.log("✅ Page created?", !!this.page); // should print true
+
+   await this.initObjects();
 });
 
 After(async function (this: CustomWorld) {
