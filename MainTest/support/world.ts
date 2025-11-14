@@ -1,17 +1,22 @@
 import { IWorldOptions, World, setWorldConstructor } from "@cucumber/cucumber";
-import { Page, Browser, APIResponse } from "playwright";
+import { Page, Browser, APIResponse, APIRequestContext } from "playwright";
 import { ProductTab } from "../tests/pages/productTab.page";
 import { TestCasesTab } from "../tests/pages/testCasesTab.page";
-import { LoginAutomationPage } from '../tests/pages/loginAutomation.page'
+import { LoginAutomationPage } from "../tests/pages/loginAutomation.page";
 import { NewUserSignUpPage } from "../tests/pages/newUserSignUp.page";
 import { LoginPage } from "../tests/pages/loginPage";
-import { FormValidationPage } from '../tests/pages/formValidation.page';
-import { ContactUsFormPage } from '../tests/pages/contactUs.page';
+import { FormValidationPage } from "../tests/pages/formValidation.page";
+import { ContactUsFormPage } from "../tests/pages/contactUs.page";
 
 export class CustomWorld extends World {
   page!: Page;
   browser!: Browser;
+
+  // API fields
+  request!: APIRequestContext;
   response!: APIResponse;
+
+  //  existing page objects
   productsTab!: ProductTab;
   testCaseTab!: TestCasesTab;
   loginPage!: LoginAutomationPage;
