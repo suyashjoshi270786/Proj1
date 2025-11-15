@@ -1,11 +1,18 @@
 import { Given, When, Then } from "@cucumber/cucumber";
-import { request as playwrightRequest, APIRequestContext, APIResponse, expect } from "@playwright/test";
+import {
+  request as playwrightRequest,
+  APIRequestContext,
+  APIResponse,
+  expect,
+} from "@playwright/test";
 
 const API_KEY = "qaclick123";
 
 let apiContext: APIRequestContext;
 let addPlaceResponse: APIResponse;
 let getPlaceResponse: APIResponse;
+let updatePlaceResponse: APIResponse;
+let deletePlaceResponse: APIResponse;
 let payload: any;
 let placeId: string;
 
@@ -71,3 +78,61 @@ Then("the place details should match the request", async function () {
   expect(body.website).toBe(payload.website);
   expect(body.language).toBe(payload.language);
 });
+
+Given("user updates place using Places API", async function () {
+  payload = {
+    place_id: placeId,
+    address: "81 winter walk, USA",
+    key: "qaclick123",
+  };
+  const ctx = await getApiContext();
+
+  updatePlaceResponse = await ctx.put("maps/api/place/update/json", {
+    params: { key: API_KEY, place_id: placeId },
+
+    headers: { "Content-Type": "application/json" },
+    data: payload,
+  });
+});
+
+When("updates address using existing place id", async function () {
+  const body = await updatePlaceResponse.json();
+  let msg = body.msg;
+
+  console.log(msg);
+});
+
+Then(
+  "user address details updated and receives {int} Ok response",
+  async function (int) {
+    expect(updatePlaceResponse.status()).toBe(200);
+  }
+);
+
+Given("user deletes place using place API", async function () {
+  payload = {
+    place_id: placeId,
+  };
+
+  const ctx = await getApiContext();
+
+  deletePlaceResponse = await ctx.post("maps/api/place/delete/json", {
+    params: { key: API_KEY },
+    headers: { "Content-Type": "application/json" },
+    data: payload,
+  });
+});
+
+When("deletes place using existing place id", async function () {
+  const body = await deletePlaceResponse.json();
+  let status = body.status;
+  expect(body.status).toBe("OK");
+  console.log(status);
+});
+
+Then(
+  "place details deleted and receives {int} OK response",
+  async function (int) {
+    expect(deletePlaceResponse.status()).toBe(200);
+  }
+);
