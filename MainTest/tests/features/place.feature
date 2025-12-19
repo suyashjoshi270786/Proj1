@@ -3,7 +3,7 @@ Feature: Places API – Add and retrieve place
   As a client of the Maps API
   I want to add a new place
   So that I can fetch it later and verify its details
-
+@addplace
   Scenario: Add a place and get its details
     Given I create a new place using the Places API
     When I fetch that place by its id

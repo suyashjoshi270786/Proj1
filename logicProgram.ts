@@ -140,3 +140,167 @@ function findOddNumber(n: number): number {
 }
 
 console.log(`sum is : ` , findOddNumber(20));
+
+
+//prime number
+
+function isPrime(n: number): boolean {
+    if(n < 2){
+
+        return false;
+    }
+
+    for(let i=2; i<n; i++){
+        if(n % i ===0){
+            return false;
+        }
+    }
+    return true;
+}
+
+function prime(n: number): void {
+
+    for(let i=0; i<=n; i++){
+
+        if(isPrime(i)){
+            console.log(i);
+        }
+    }
+}
+prime(40);
+
+
+function anagrams(str1: string, str2: string): boolean {
+
+    if(str1.length !== str2.length){
+        return false;
+    }
+
+    return str1.split('').sort().join('') === str2.split('').sort().join('');
+}
+
+console.log(anagrams("tata", "atat"));
+
+
+//keep word position same
+function reverseWords(str: string): string {
+  return str
+    .split(" ")
+    .map(word => word.split("").reverse().join(""))
+    .join(" ");
+}
+
+console.log(reverseWords("hello world")); // "olleh dlrow"
+
+
+//remove duplicate words from string
+function removeDup(str: string): string {
+  let res = "";
+
+  for (let ch of str) {
+    if (!res.includes(ch)) {
+      res += ch;
+    }
+  }
+
+  return res;
+}
+
+console.log(removeDup("aabbccddeeff")); // "abcdef"
+
+
+
+//remove duplicates from string
+
+function duplicate(str: string): string{
+
+    let result = "";
+    let seen = new Set();
+
+    for(let char of str){
+
+if(!seen.has(char))
+{
+
+seen.add(char);
+result+=char;
+}
+
+    }
+
+    return result;
+}
+
+
+console.log(duplicate("Infosys"));
+
+
+
+//bubble sort
+function bubble(arr: number[]): number[]{
+
+    let a = [...(arr)];
+
+    for(let i=0; i<a.length; i++){
+for(let j =0; j<a.length-i-1; j++){
+
+    if(a[j] > a[j+1]){
+
+       [a[j], a[j+1]] = [a[j+1], a[j]];
+    }
+}
+    }
+
+    return a;
+}
+
+console.log(bubble([2,1,3,4]));
+
+
+
+//ascending
+function ascending(arr: number[]): number[] {
+
+    for(let i=0; i<arr.length; i++){
+        for(let j=i+1; j<arr.length; j++){
+if(arr[i] > arr[j]){
+
+
+            let temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    }
+
+    return arr;
+}
+
+
+console.log(ascending([2,1,3,5,9,7,12]));
+
+
+
+
+function second(arr: number[]): number {
+    let sec = -Infinity;
+    let max = -Infinity;
+
+    for(let n of arr){
+        if(n > max){
+
+          sec = max;
+          max = n;
+        }
+        else if(n > sec && n!==max)
+        {
+
+            sec = n;
+        }  
+    }
+
+    return sec;
+}
+
+
+console.log(second([1,2,3,4]));

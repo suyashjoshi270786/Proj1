@@ -1,7 +1,7 @@
 import { Before, After, setDefaultTimeout, AfterAll } from "@cucumber/cucumber";
 import {
   chromium,
-  request as playwrightRequest,   // 👈 import request object
+  request as playwrightRequest,   //  import request object
   APIRequestContext,
 } from "@playwright/test";          // or "playwright" if you prefer
 import { CustomWorld } from "./world";
@@ -19,7 +19,7 @@ Before(async function (this: CustomWorld) {
   const context = await this.browser.newContext();
   this.page = await context.newPage();
 
-  // ✅ Correct way to create APIRequestContext
+
   apiContext = await playwrightRequest.newContext({
     baseURL: "https://rahulshettyacademy.com",
   });
