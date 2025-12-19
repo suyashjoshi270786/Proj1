@@ -6,7 +6,7 @@ import * as fs from "fs";
 import { json } from "stream/consumers";
 
 Given("user is on login page", async function (this: CustomWorld) {
-  await this.page.goto("https://automationexercise.com/login");
+  await this.page.goto("https://automationexercise.com/login", {timeout: 60000});
 });
 
 When("user enters valid credentials from test data", async function (this: CustomWorld) {
