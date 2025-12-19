@@ -7,7 +7,8 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test",
+    "test": "cucumber-js",
+    "test:addplace": "cucumber-js --tags",
     "report": "npx cucumber-js MainTest/tests/features/*.feature --require-module ts-node/register --require MainTest/**/*.ts --format json:reports/cucumber-report.json && ts-node generate-report.ts",
     "lint:fix": "eslint ./ --ext .js,.ts,.tsx --fix"
   },
